@@ -3,7 +3,6 @@ import Image from "next/image";
 
 const DisplayTechIcons = async ({ techStack }: TechIconProps) => {
   const techIcon = await getTechLogos(techStack);
-  console.log(techIcon);
   return (
     <div className="flex flex-row ">
       {techIcon.slice(0, 3).map(({ tech, url }, index) => (
