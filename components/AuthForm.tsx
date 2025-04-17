@@ -22,8 +22,10 @@ const authFormSchema = (type: FormType) => {
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
   const formSchema = authFormSchema(type);
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
+  // 1. infer the types
+  type FormFields = z.infer<typeof formSchema>;
+  // 2. Define your form.
+  const form = useForm<FormFields>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -32,7 +34,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
     },
   });
 
-  // 2. Define a submit handler.
+  // 3. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       if (type === "sign-up") {
